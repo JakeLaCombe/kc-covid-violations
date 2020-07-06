@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2c1f5a0ed80952acbffe82cb588957ff",
+    "revision": "7e0b6daa7be3fb91409165f55299a458",
     "url": "/kc-covid-violations/index.html"
   },
   {
-    "revision": "ba1a380443fa1089804a",
+    "revision": "a916ac9d3d73b4952a54",
     "url": "/kc-covid-violations/static/css/main.8a8b11d8.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/kc-covid-violations/static/js/2.ebeeca64.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "ba1a380443fa1089804a",
-    "url": "/kc-covid-violations/static/js/main.65171719.chunk.js"
+    "revision": "a916ac9d3d73b4952a54",
+    "url": "/kc-covid-violations/static/js/main.3ba6e8ad.chunk.js"
   },
   {
     "revision": "7b45070433301fc5b302",
