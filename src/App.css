@@ -36,3 +36,57 @@
     transform: rotate(360deg);
   }
 }
+
+.Marker {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  background-color: rgb(55, 119, 74);
+  border: 2px solid #fff;
+  border-radius: 100%;
+  user-select: none;
+  transform: translate(-50%, -50%);
+  cursor: 'pointer';
+}
+
+.Marker:hover {
+  z-index: 1;
+}
+
+.Marker.Active {
+  z-index: 3;
+}
+
+.Marker-Text {
+  border: #060606 solid 2px;
+  border-radius: 10px;
+  position: absolute;
+  background: #fff;
+  bottom: calc(100% + 10px);
+  left: -30em;
+  padding: 10px;
+  width: 60em;
+  z-index: 100;
+}
+
+.Marker-Text:after {
+  content: " ";
+  position: absolute;
+  top: 100%; /* At the bottom of the tooltip */
+  left: 50%;
+  margin-left: -15px;
+  border-width: 11px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+.Marker-Address {
+  text-decoration: underline;
+}
+
+.Marker-Close {
+  float: right;
+  cursor: pointer;
+}
