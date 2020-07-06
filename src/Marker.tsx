@@ -14,7 +14,7 @@ export const Marker = ({ address, caseId, isActive = false, lat, lng, onClick = 
   const [data, setData] = useState("");
 
   const fetchData = async () => {
-    const response = await fetch(`http://kc-covid-violations-api.herokuapp.com/api/${caseId}`);
+    const response = await fetch(`https://kc-covid-violations-api.herokuapp.com/api/${caseId}`);
     const json = await response.json();
     return json.data as string;
   }
