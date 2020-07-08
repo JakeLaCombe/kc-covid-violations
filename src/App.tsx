@@ -10,16 +10,64 @@ const center = {
   lng: -94.580345,
 };
 
+type StatusChoices = 'ALL' | 'OPEN' | 'RESOL'
+interface QueryParams {
+  status: StatusChoices
+  date: Date
+}
+
+const buildQuery = ({status, date}: QueryParams) => {
+  let query = `creation_date > '${date.toISOString().substring(0,19)}'`
+
+  if (status !== 'ALL') {
+    query += ` AND status='${status}'`
+  }
+
+  return query;
+};
+
+const firstDate = new Date();
+
 const App = () => {
     const [currentMarker, setCurrentMarker] = useState<string>("");
-    const { data } = useQuery<FeatureCollection, 'violations'>('violations', async function() {
-      const response = await fetch('https://data.kcmo.org/resource/ti6s-47nz.geojson');
+    const [formData, setFormData] = useState<QueryParams>({status: 'OPEN', date: new Date(
+      firstDate.getFullYear(),
+      firstDate.getMonth() - 1,
+      firstDate.getDay(),
+    )});
+  
+    const { data, refetch } = useQuery<FeatureCollection, 'violations'>('violations', async function() {
+      const response = await fetch(`https://data.kcmo.org/resource/ti6s-47nz.geojson?$where=${buildQuery(formData)}`);
+      console.log(`https://data.kcmo.org/resource/ti6s-47nz.geojson?$where=${buildQuery(formData)}`);
       const data = await response.json();
       return data;
     });
 
     return (
       <div style={{ height: '100vh', width: '100%' }}>
+        <div className="Navigation">
+          <h1 className="Navigation-Header">KC Covid Violations</h1>
+          <hr className="Navigation-Divider"/>
+          <form className="Query-Form" onSubmit={(e) => {
+              e.preventDefault(); 
+              refetch();
+            }}>
+            <label htmlFor="status">Case Status:</label>
+            <span className="form-spacer-1" />
+            <select id="status" value={formData.status} onChange={(e) => {
+              const formDataDup:QueryParams = Object.assign({}, formData);
+              formDataDup.status = e.currentTarget.value as StatusChoices;
+              setFormData(formDataDup);
+            }}>
+              <option value='ALL'>All</option>
+              <option value='OPEN'>Open</option>
+              <option value='RESOL'>Resolved</option>
+            </select>
+            <span className="form-spacer-2" />
+            <input type="submit" />
+          </form>
+        </div>
+        
         <GoogleMapReact
           bootstrapURLKeys={{ key: 'AIzaSyBSRItjUte9j61pdvxwwVHKeY72fbACnZY' }}
           defaultCenter={center}
