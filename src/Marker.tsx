@@ -10,6 +10,8 @@ interface Props {
   onClose: () => unknown
 }
 
+const styleRegex = new RegExp('/style="[a-zA-Z0-9:;\.\s\(\)\-\,]*"/gi');
+
 export const Marker = ({ address, caseId, isActive = false, lat, lng, onClick = () => {}, onClose = () => {} }: Props) => {
   const [data, setData] = useState("");
 
@@ -31,7 +33,7 @@ export const Marker = ({ address, caseId, isActive = false, lat, lng, onClick = 
           <h1 className="Marker-Address">Address <span className="Marker-Close" onClick={(event) => {event.stopPropagation(); onClose()}}>X</span></h1>
           <p>{address}</p>
           {!data && <p>Fetching Data...</p>}
-          <div dangerouslySetInnerHTML={{__html: data }} />
+          <div dangerouslySetInnerHTML={{__html: data.replace(styleRegex, '') }} />
         </div>}
     </div>
   );

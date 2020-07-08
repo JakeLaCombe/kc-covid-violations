@@ -85,9 +85,9 @@
   position: absolute;
   background: #fff;
   bottom: calc(100% + 10px);
-  left: -30em;
+  left: -15em;
   padding: 10px;
-  width: 60em;
+  width: 30em;
   z-index: 100;
 }
 

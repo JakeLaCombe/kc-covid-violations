@@ -51,7 +51,7 @@ const App = () => {
           <h1 className="Navigation-Header">KC Covid Violations</h1>
           <hr className="Navigation-Divider"/>
           {isFetching && <div className="Loading-Container">
-            <Loader type="Puff" color="#666" height={50} width={50} />
+            <Loader type="Puff" color="#666" height={25} width={25} />
           </div>}
           {!isFetching && (<form className="Query-Form" onSubmit={(e) => {
               e.preventDefault(); 
