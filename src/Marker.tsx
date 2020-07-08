@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 interface Props {
   address: string
   caseId?: string
+  caseStatus?: string
   isActive?: boolean,
   lat: number
   lng: number
@@ -12,7 +13,7 @@ interface Props {
 
 const styleRegex = new RegExp('/style="[a-zA-Z0-9:;\.\s\(\)\-\,]*"/gi');
 
-export const Marker = ({ address, caseId, isActive = false, lat, lng, onClick = () => {}, onClose = () => {} }: Props) => {
+export const Marker = ({ address, caseId, caseStatus, isActive = false, lat, lng, onClick = () => {}, onClose = () => {} }: Props) => {
   const [data, setData] = useState("");
 
   const fetchData = async () => {
@@ -28,7 +29,7 @@ export const Marker = ({ address, caseId, isActive = false, lat, lng, onClick = 
         if(!data) {
           setData(await fetchData());
         } 
-      }} className={`Marker ${isActive ? 'Active' : ''}`} {...{lat,lng}}>
+      }} className={`Marker ${isActive ? 'Active' : ''} ${caseStatus === 'RESOL' ? 'Resolved' : '' }`} {...{lat,lng}}>
         {isActive && <div className="Marker-Text" >
           <h1 className="Marker-Address">Address <span className="Marker-Close" onClick={(event) => {event.stopPropagation(); onClose()}}>X</span></h1>
           <p>{address}</p>

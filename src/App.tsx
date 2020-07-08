@@ -76,8 +76,15 @@ const App = () => {
               formDataDup.date = new Date(e.currentTarget.value);;
               setFormData(formDataDup);
             }} />
-            <span className="form-spacer-2" />
+            <span className="form-spacer-1" />
             <input type="submit" value="Search" />
+            <div className="Legend">
+            <span>Open</span>
+            <span className="Marker-Legend" />
+            <span className="form-spacer-1" />
+            <span>Resolved</span>
+            <span className="Marker-Legend Resolved" />
+            </div>
           </form>)}
         </div>
         
@@ -89,6 +96,7 @@ const App = () => {
           {!isFetching && data?.features.map(feature => <Marker
               address={feature?.properties?.street_address}
               caseId={feature?.properties?.case_id}
+              caseStatus={feature?.properties?.status}
               onClick={() => {
                 setCurrentMarker(feature?.properties?.case_id || "");
               }}

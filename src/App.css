@@ -57,6 +57,15 @@
   }
 }
 
+.Marker-Legend {
+  border: 2px solid #fff;
+  border-radius: 100%;
+  display: inline-block;
+  background-color: rgb(55, 119, 74);
+  width: 18px;
+  height: 18px;
+}
+
 .Marker {
   position: absolute;
   top: 50%;
@@ -111,6 +120,10 @@
   cursor: pointer;
 }
 
+.Resolved {
+  background-color: rgb(104, 101, 101);
+}
+
 .form-spacer-1 {
   display: inline-block;
   margin-right: 0.5em;
@@ -129,6 +142,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.Legend {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
 }
 
 select {
