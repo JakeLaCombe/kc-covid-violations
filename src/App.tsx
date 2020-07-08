@@ -77,7 +77,7 @@ const App = () => {
               setFormData(formDataDup);
             }} />
             <span className="form-spacer-2" />
-            <input type="submit" />
+            <input type="submit" value="Search" />
           </form>)}
         </div>
         

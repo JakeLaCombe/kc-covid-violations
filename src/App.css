@@ -130,3 +130,22 @@
   align-items: center;
   justify-content: center;
 }
+
+select {
+  padding: 0.25em;
+}
+
+input[type="submit"] {
+  display: inline-block;
+  height: 100%;
+  padding: 0.25em 1em;
+  background: #ffffff;
+  border-radius: 5px;
+  border-width: 1px;
+}
+
+input[type="submit"]:hover {
+  background: #003d0a;
+  color: #ffffff;
+  cursor: pointer;
+}
