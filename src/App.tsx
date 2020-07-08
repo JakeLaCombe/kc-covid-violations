@@ -4,6 +4,7 @@ import GoogleMapReact from 'google-map-react';
 import './App.css';
 import { FeatureCollection, Point } from "geojson";
 import { Marker } from "./Marker";
+import Loader from 'react-loader-spinner';
 
 const center = {
  lat: 39.093349,
@@ -26,6 +27,8 @@ const buildQuery = ({status, date}: QueryParams) => {
   return query;
 };
 
+const formatDate = (date: Date) => (date.toISOString().substring(0,10));
+
 const firstDate = new Date();
 
 const App = () => {
@@ -33,12 +36,11 @@ const App = () => {
     const [formData, setFormData] = useState<QueryParams>({status: 'OPEN', date: new Date(
       firstDate.getFullYear(),
       firstDate.getMonth() - 1,
-      firstDate.getDay(),
+      firstDate.getDate(),
     )});
   
-    const { data, refetch } = useQuery<FeatureCollection, 'violations'>('violations', async function() {
+    const { isFetching, data, refetch } = useQuery<FeatureCollection, 'violations'>('violations', async function() {
       const response = await fetch(`https://data.kcmo.org/resource/ti6s-47nz.geojson?$where=${buildQuery(formData)}`);
-      console.log(`https://data.kcmo.org/resource/ti6s-47nz.geojson?$where=${buildQuery(formData)}`);
       const data = await response.json();
       return data;
     });
@@ -48,7 +50,10 @@ const App = () => {
         <div className="Navigation">
           <h1 className="Navigation-Header">KC Covid Violations</h1>
           <hr className="Navigation-Divider"/>
-          <form className="Query-Form" onSubmit={(e) => {
+          {isFetching && <div className="Loading-Container">
+            <Loader type="Puff" color="#666" height={50} width={50} />
+          </div>}
+          {!isFetching && (<form className="Query-Form" onSubmit={(e) => {
               e.preventDefault(); 
               refetch();
             }}>
@@ -64,8 +69,16 @@ const App = () => {
               <option value='RESOL'>Resolved</option>
             </select>
             <span className="form-spacer-2" />
+            <label htmlFor="date">Start Date:</label>
+            <span className="form-spacer-1" />
+            <input name="date" type="date" value={formatDate(formData.date)} onChange={(e) => {
+              const formDataDup:QueryParams = Object.assign({}, formData);
+              formDataDup.date = new Date(e.currentTarget.value);;
+              setFormData(formDataDup);
+            }} />
+            <span className="form-spacer-2" />
             <input type="submit" />
-          </form>
+          </form>)}
         </div>
         
         <GoogleMapReact
@@ -73,7 +86,7 @@ const App = () => {
           defaultCenter={center}
           defaultZoom={14}
         >
-          {data?.features.map(feature => <Marker
+          {!isFetching && data?.features.map(feature => <Marker
               address={feature?.properties?.street_address}
               caseId={feature?.properties?.case_id}
               onClick={() => {
