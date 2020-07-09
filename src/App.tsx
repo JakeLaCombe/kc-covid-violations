@@ -32,6 +32,7 @@ const formatDate = (date: Date) => (date.toISOString().substring(0,10));
 const firstDate = new Date();
 
 const App = () => {
+    const [displayFilters, setDisplayFilters] = useState(true);
     const [currentMarker, setCurrentMarker] = useState<string>("");
     const [formData, setFormData] = useState<QueryParams>({status: 'OPEN', date: new Date(
       firstDate.getFullYear(),
@@ -48,36 +49,42 @@ const App = () => {
     return (
       <div style={{ height: '100vh', width: '100%' }}>
         <div className="Navigation">
-          <h1 className="Navigation-Header">KC Covid Violations</h1>
+          <h1 className="Navigation-Header">KCMO Covid Violations</h1>
           <hr className="Navigation-Divider"/>
+          <p onClick={() => setDisplayFilters(!displayFilters)} className="Trigger-Filters">{`${displayFilters ? 'Hide Filters' : 'Display Filters'}`}</p>
           {isFetching && <div className="Loading-Container">
             <Loader type="Puff" color="#666" height={25} width={25} />
           </div>}
-          {!isFetching && (<form className="Query-Form" onSubmit={(e) => {
+          {!isFetching && (
+            <form className="Query-Form" onSubmit={(e) => {
               e.preventDefault(); 
               refetch();
             }}>
-            <label htmlFor="status">Case Status:</label>
-            <span className="form-spacer-1" />
-            <select id="status" value={formData.status} onChange={(e) => {
-              const formDataDup:QueryParams = Object.assign({}, formData);
-              formDataDup.status = e.currentTarget.value as StatusChoices;
-              setFormData(formDataDup);
-            }}>
-              <option value='ALL'>All</option>
-              <option value='OPEN'>Open</option>
-              <option value='RESOL'>Resolved</option>
-            </select>
-            <span className="form-spacer-2" />
-            <label htmlFor="date">Start Date:</label>
-            <span className="form-spacer-1" />
-            <input name="date" type="date" value={formatDate(formData.date)} onChange={(e) => {
-              const formDataDup:QueryParams = Object.assign({}, formData);
-              formDataDup.date = new Date(e.currentTarget.value);;
-              setFormData(formDataDup);
-            }} />
-            <span className="form-spacer-1" />
-            <input type="submit" value="Search" />
+            <div className={`Input-Elements ${displayFilters ? '' : 'Hide'}`}>
+              <div className="Input-Group">
+                <label htmlFor="status">Case Status:</label>
+                <select id="status" value={formData.status} onChange={(e) => {
+                  const formDataDup:QueryParams = Object.assign({}, formData);
+                  formDataDup.status = e.currentTarget.value as StatusChoices;
+                  setFormData(formDataDup);
+                }}>
+                  <option value='ALL'>All</option>
+                  <option value='OPEN'>Open</option>
+                  <option value='RESOL'>Resolved</option>
+                </select>
+              </div>
+              <div className="Input-Group">
+                <label htmlFor="date">Start Date:</label>
+                <input name="date" type="date" value={formatDate(formData.date)} onChange={(e) => {
+                  const formDataDup:QueryParams = Object.assign({}, formData);
+                  formDataDup.date = new Date(e.currentTarget.value);;
+                  setFormData(formDataDup);
+                }} />
+              </div>
+              <div className="Input-Group">
+                <input type="submit" value="Search" />
+              </div>
+            </div>
             <div className="Legend">
             <span>Open</span>
             <span className="Marker-Legend" />

@@ -13,6 +13,11 @@
   }
 }
 
+.Input-Group {
+  margin-top: 0.5em;
+  margin-right: 1em;
+}
+
 .Navigation {
   min-height: 1em;
   padding: 1em;
@@ -20,6 +25,17 @@
   background-color: #ffffff;
   box-shadow: 0px 2px 10px #000000;
   position: relative;
+}
+
+.Input-Elements {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.Trigger-Filters {
+  text-align: center;
+  cursor: pointer;
+  display: none;
 }
 
 .Navigation-Header {
@@ -94,9 +110,9 @@
   position: absolute;
   background: #fff;
   bottom: calc(100% + 10px);
-  left: -15em;
+  left: -10em;
   padding: 10px;
-  width: 30em;
+  width: 20em;
   z-index: 100;
 }
 
@@ -136,6 +152,7 @@
 .Query-Form {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .Loading-Container {
@@ -146,6 +163,7 @@
 
 .Legend {
   margin-left: auto;
+  margin-top: 0.5em;
   display: flex;
   align-items: center;
 }
@@ -163,8 +181,46 @@ input[type="submit"] {
   border-width: 1px;
 }
 
+label {
+  margin-right: 4px;
+}
+
 input[type="submit"]:hover {
   background: #003d0a;
   color: #ffffff;
   cursor: pointer;
+}
+
+@media (max-width: 340px) {
+  .Trigger-Filters {
+    display: block;
+  }
+
+  .Input-Elements {
+    margin-right: 0;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  label { 
+    margin-top: 0.5em;
+  }
+
+  input[type="submit"] {
+    width: 100%;
+  }
+
+  .Input-Group {
+    margin-right: 0;
+    width: 100%;
+  }
+
+  .Input-Group > * {
+    display: block;
+    width: 100%;
+  }
+
+  .Hide {
+    display: none !important;
+  }
 }
