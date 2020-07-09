@@ -77,7 +77,7 @@
   border-radius: 100%;
   user-select: none;
   transform: translate(-50%, -50%);
-  cursor: 'pointer';
+  cursor: pointer;
 }
 
 .Marker:hover {

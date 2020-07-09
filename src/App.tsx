@@ -89,6 +89,10 @@ const App = () => {
         </div>
         
         <GoogleMapReact
+          options={{
+            clickableIcons: false,
+            draggableCursor: 'default',
+          }}
           bootstrapURLKeys={{ key: 'AIzaSyBSRItjUte9j61pdvxwwVHKeY72fbACnZY' }}
           defaultCenter={center}
           defaultZoom={14}
