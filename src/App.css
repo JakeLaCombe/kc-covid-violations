@@ -61,7 +61,7 @@
   border: 2px solid #fff;
   border-radius: 100%;
   display: inline-block;
-  background-color: rgb(55, 119, 74);
+  background-color: rgb(89, 175, 115);
   width: 18px;
   height: 18px;
 }
@@ -72,7 +72,7 @@
   left: 50%;
   width: 18px;
   height: 18px;
-  background-color: rgb(55, 119, 74);
+  background-color: rgb(89, 175, 115);
   border: 2px solid #fff;
   border-radius: 100%;
   user-select: none;
@@ -121,7 +121,7 @@
 }
 
 .Resolved {
-  background-color: rgb(104, 101, 101);
+  background-color: rgb(160, 157, 157);
 }
 
 .form-spacer-1 {
